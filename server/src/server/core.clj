@@ -74,4 +74,5 @@
                   (str (:server-port config))
                   "3000"))]
     (println "Starting server on port" port)
-    (run-jetty app {:port port :join? false})))
+    (run-jetty app {:host "0.0.0.0" :port port :join? false})))
+
