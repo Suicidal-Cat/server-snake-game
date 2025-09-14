@@ -1,0 +1,10 @@
+{:server-port "8080" ;; port number
+ :disableDB false ;; disable database 
+ :jwt-secret "testtest" ;;jwt key
+ :db-config ;; database connection config 
+ {:dbtype "mysql" ;; type of database
+  :dbname "test-database" ;; name
+  :user "" ;; username
+  :password "" ;; passowrd
+  :host "localhost" ;; host
+  :port 3000}} ;; hosted port number
