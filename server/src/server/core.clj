@@ -11,7 +11,7 @@
    [server.game.cake-game :as cake]
    [server.game.main-game :as main]
    [server.game.singleplayer-game :as single]
-   [server.routes :refer [public-routes wrapped-protected-routes]]))
+   [server.routes :refer [protected-routes public-routes]]))
 
 (def config (read-config "config.edn"))
 (def players-queue (atom []))
@@ -61,7 +61,7 @@
   (routes
    (GET "/ws" [] echo-handler)
    public-routes
-   wrapped-protected-routes))
+   protected-routes))
 
 (def app
   (-> all-routes

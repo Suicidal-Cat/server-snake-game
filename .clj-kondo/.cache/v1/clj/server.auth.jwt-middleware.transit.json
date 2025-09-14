@@ -1,0 +1,1 @@
+["^ ","~$wrap-jwt-auth",["^ ","~:row",5,"~:col",1,"~:fixed-arities",["~#set",[1]],"~:name","^0","~:ns","~$server.auth.jwt-middleware","~:top-ns","^7","~:arities",["^ ","~i1",["^ ","~:ret","~:fn","~:arglist-str","[handler]"]],"~:type","^;"],"~:filename","C:\\Users\\darek\\Desktop\\server-snake-game\\server\\src\\server\\auth\\jwt_middleware.clj"]
