@@ -1,11 +1,11 @@
-FROM clojure:temurin-21-tools-deps
+FROM clojure:lein-2.11.2
 
 WORKDIR /app
 
 COPY . .
 
-RUN clj -P
+RUN lein deps
 
 EXPOSE 3000
 
-CMD ["clj", "-M:-main"]
+CMD ["lein", "run"]
