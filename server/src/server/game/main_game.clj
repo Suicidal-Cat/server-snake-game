@@ -21,8 +21,7 @@
 ;stop the game and save the result
 (defn end-game-loop [stop-flag final-score result]
   (reset! final-score result)
-  (reset! stop-flag true)
-  (db/save-game @final-score true (:time db/game-mode-enum)))
+  (reset! stop-flag true))
 
 ;check snake collisions
 (defn snake-collisions [game-state stop-game final-score player1 player2]
