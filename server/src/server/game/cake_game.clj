@@ -150,9 +150,9 @@
         (swap! game-state update-snakes-positions snake-directions)
         (snake-collisions game-state stop-game final-score player1 player2)
         (swap! snake-directions (fn [state] (assoc-in (assoc-in state [:snake1 :change-dir] true) [:snake2 :change-dir] true))))
-      (Thread/sleep 50)
       (send-snake-data player1 player2 @final-score)
       (swap! online-games dissoc (keyword game-id))
+      (Thread/sleep 100)
       (close-sockets player1 player2))))
 
 ;start the game
