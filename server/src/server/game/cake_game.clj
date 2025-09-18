@@ -1,6 +1,5 @@
 (ns server.game.cake-game
   (:require
-   [server.db.dbBroker :as db :refer [get-random-cake-with-parts]]
    [server.game.game-helper-func :refer [close-sockets
                                          generate-valid-coordinate-pair-ball
                                          init-game-cake-state
@@ -116,7 +115,7 @@
 ;update snakes positions
 (defn update-snakes-positions [game-state snake-directions]
   (assoc game-state
-         :snake1 (:snake1 game-state)
+         :snake1 (move-snake-borderless (:snake1 game-state) (:direction (:snake1 @snake-directions)) grid-size field-size)
          :snake2 (move-snake-borderless (:snake2 game-state) (:direction (:snake2 @snake-directions)) grid-size field-size)))
 
 ;; update initial game state
@@ -132,8 +131,8 @@
 (defn broadcast-game-state [player1 player2 game-id]
   (future
     (let [game-state (atom (assoc (init-game-cake-state game-id)
-                                  :cake1 (get-random-cake-with-parts)
-                                  :cake2 (get-random-cake-with-parts)
+                                  :cake1 {:cake-id 4, :cake-image "strawberryCake.png", :percentage 0, :parts [{:part-id 4, :part-image "strawberry.png", :amount 6, :current 0} {:part-id 8, :part-image "lemon.png", :amount 2, :current 0} {:part-id 10, :part-image "floury.png", :amount 2, :current 0} {:part-id 2, :part-image "butter.png", :amount 2, :current 0} {:part-id 1, :part-image "milk.png", :amount 2, :current 0}]}
+                                  :cake2 {:cake-id 6, :cake-image "cherryCake.png", :percentage 0, :parts [{:part-id 5, :part-image "cherry.png", :amount 6, :current 0} {:part-id 7, :part-image "grape.png", :amount 2, :current 0} {:part-id 3, :part-image "honey.png", :amount 2, :current 0} {:part-id 10, :part-image "floury.png", :amount 2, :current 0} {:part-id 2, :part-image "butter.png", :amount 2, :current 0}]}
                                   :parts []))
           snake-directions ((keyword game-id) @online-games)
           stop-game (atom false)

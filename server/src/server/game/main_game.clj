@@ -1,6 +1,5 @@
 (ns server.game.main-game
   (:require
-   [server.db.dbBroker :as db]
    [server.game.game-helper-func :refer [close-sockets
                                          generate-valid-coordinate-pair-ball
                                          in-bounds? init-game-state inside?
@@ -120,8 +119,8 @@
 
 ;update snakes positions
 (defn update-snakes-positions [game-state snake-directions]
-  (assoc game-state
-         :snake1 (:snake1 game-state)
+  (assoc game-state 
+         :snake1 (move-snake (:snake1 game-state) (:direction (:snake1 @snake-directions)) grid-size)
          :snake2 (move-snake (:snake2 game-state) (:direction (:snake2 @snake-directions)) grid-size)))
 
 (defn update-clock-time [game-state final-score stop-game player1 player2]
