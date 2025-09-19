@@ -47,16 +47,16 @@
       (Thread/sleep 1000)
       (while (not @stop-game)
         (Thread/sleep 110)
-        (ws/send (:socket player1) (pr-str @game-state))
         (update-game-on-eat game-state)
         (swap! game-state (fn [game-state]
                             (assoc game-state
                                    :snake1 (move-snake-borderless (:snake1 game-state) (:direction (:snake1 @snake-directions)) grid-size field-size))))
-        (snake-collisions game-state stop-game final-score player1)
+        (snake-collisions game-state stop-game final-score player1) 
+        (ws/send (:socket player1) (pr-str @game-state))
         (swap! snake-directions (fn [state] (assoc-in state [:snake1 :change-dir] true)))) 
+      (Thread/sleep 100)
       (ws/send (:socket player1) (pr-str @final-score))
       (swap! online-games dissoc (keyword game-id)) 
-      (Thread/sleep 100)
       (ws/close (:socket player1)))))
 
 ;start the game

@@ -143,14 +143,14 @@
       (generate-cake-parts game-state stop-game)
       (while (not @stop-game)
         (Thread/sleep tick-duration)
-        (send-snake-data player1 player2 @game-state)
         (update-game-on-eat game-state player1 player2 stop-game final-score)
         (swap! game-state update-snakes-positions snake-directions)
-        (snake-collisions game-state stop-game final-score player1 player2)
-        (swap! snake-directions (fn [state] (assoc-in (assoc-in state [:snake1 :change-dir] true) [:snake2 :change-dir] true))))
+        (snake-collisions game-state stop-game final-score player1 player2) 
+        (send-snake-data player1 player2 @game-state)
+        (swap! snake-directions (fn [state] (assoc-in (assoc-in state [:snake1 :change-dir] true) [:snake2 :change-dir] true)))) 
+      (Thread/sleep 100)
       (send-snake-data player1 player2 @final-score)
       (swap! online-games dissoc (keyword game-id))
-      (Thread/sleep 100)
       (close-sockets player1 player2))))
 
 ;start the game
